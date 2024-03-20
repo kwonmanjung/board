@@ -1,0 +1,32 @@
+
+
+1. 파일 들을 설치 한다. 
+
+2. Jdk 11.0.22 버전을 설치
+   - jdk 11 , 1.8 등 낮은 버전 설치해야 lombok 오류 안남.
+
+
+
+2. DB 데이터 적재
+
+    SELECT * FROM board;
+
+    use board;
+
+    DELIMITER $$
+
+    CREATE PROCEDURE testDataInsert()
+    BEGIN
+        DECLARE i INT DEFAULT 1;
+
+        WHILE i <= 120 DO
+            INSERT INTO board(title, content)
+            VALUES(concat('제목',i), concat('내용',i));
+            SET i = i + 1;
+        END WHILE;
+    END$$
+    DELIMITER $$
+
+    call testDataInsert();
+
+
